@@ -13,9 +13,18 @@ class EmpleadoController
     }
 
     function getEmpleados(){
-        $empleados= $this->model->GetEmpleados();
+        $empleados= $this->model->GetEmpleados(1);
         $this->view->getEmpleados($empleados);
 
+    }
+
+    function addEmpleados(){
+        $nombre="Martin";
+        $apellido="Perez";
+        $edad=38;
+        $tipo=1;
+        $id_empresa=1;
+        $this->model->addEmpleado($nombre,$apellido,$edad,$tipo,$id_empresa);
     }
 
 }
