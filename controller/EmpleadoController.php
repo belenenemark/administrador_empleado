@@ -12,21 +12,31 @@ class EmpleadoController
         $this->view= new EmpleadoView();
     }
 
-    function getEmpleados(){
+    // function getEmpleados(){
+    //     $empleados= $this->model->GetEmpleados(1);
+    //     $this->view->getEmpleados($empleados);
+
+    // }
+
+    function Home(){
         $empleados= $this->model->GetEmpleados(1);
         $this->view->getEmpleados($empleados);
-
+    }
+    function Promedio($empresa){
+        $promedio= $this->model->getPromedio($empresa);
+         $this->view->getPromedio($promedio);
+ 
     }
 
-    function addEmpleado(){
-        $nombre="Martin";
-        $apellido="Perez";
+    function insertarEmpleado(){
+        $nombre="Lucas";
+        $apellido="Gonzalez";
         $edad=38;
-        $tipo=2;
+        $tipo=1;
         $id_empresa=1;
-        $dni=3899999;
+        $dni=3899997;
         $tipo_diseniador="web";
-        $lenguaje=null;
+        $lenguaje="php";
         //Carga de empleado
         $this->model->addEmpleado($nombre,$apellido,$edad,$tipo,$id_empresa,$dni,$lenguaje,$tipo_diseniador);
         //voy a comprobar si el usuario ingresado fue exitoso
@@ -34,11 +44,7 @@ class EmpleadoController
         $this->view->addEmpleado($empleado);
         }
 
-    function getPromedio($empresa){
-       $promedio= $this->model->getPromedio($empresa);
-        $this->view->getPromedio($promedio);
-
-    }
+    
         
 
 }

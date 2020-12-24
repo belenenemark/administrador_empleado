@@ -19,9 +19,9 @@ class EmpleadoModel
      function getEmpleadoxDni($dni){
         $sentencia = $this->db->prepare( "SELECT * FROM empleado WHERE dni=?");
         $sentencia->execute(array($dni));
-        $empleados = $sentencia->fetch(PDO::FETCH_ASSOC);
+        $empleado = $sentencia->fetch(PDO::FETCH_ASSOC);
         
-        return $empleados;
+        return $empleado;
     }
 
     /* Con las siguientes dos consultas cargaremos un empleado y le asignaremos el tipo de empleado(diseñador o programador)  */
@@ -44,7 +44,7 @@ class EmpleadoModel
      * lo adicional. 
        */
     function addProgramador($id,$dni,$lenguaje){
-        $sentencia = $this->db->prepare("INSERT INTO empleado (id,dni,lenguaje_programacion) VALUES(?,?,?)");
+        $sentencia = $this->db->prepare("INSERT INTO programador (id,dni,lenguaje_programacion) VALUES(?,?,?)");
         $sentencia->execute(array($id,$dni,$lenguaje));
     }
    function addDiseñador($id,$dni,$tipo){
@@ -55,7 +55,7 @@ class EmpleadoModel
     /** Consulta para obtener el promedio de empleados por edad y por las dudas por empresa. */
      function getPromedio($empresa){
         $sentencia = $this->db->prepare( "SELECT AVG(edad) AS 'promedio' FROM empleado WHERE id_empresa=?");
-        $sentencia->execute(array($empresa));
+        $sentencia->execute(array($empresa[":ID"]));
         $empleados = $sentencia->fetch(PDO::FETCH_ASSOC);
         return $empleados;
     }
