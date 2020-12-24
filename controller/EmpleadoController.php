@@ -1,6 +1,6 @@
 <?php 
-require_once "../model/EmpleadoModel.php";
-require_once "../view/EmpleadoView.php";
+require_once "model/EmpleadoModel.php";
+require_once "view/EmpleadoView.php";
 class EmpleadoController 
 {
     private $model;

@@ -21,12 +21,11 @@ class EmpleadoView
        }
    }
    function getPromedio($promedio){
-       var_dump($promedio);
+       echo "<p>El promedio de edad de los empleados es:".$promedio['promedio']."</p>";
    }
 
 }
-$empleados= new EmpleadoController();
-$empleados->getPromedio(1);
+
 
 
     ?>
