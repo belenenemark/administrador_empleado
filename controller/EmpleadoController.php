@@ -18,14 +18,28 @@ class EmpleadoController
 
     }
 
-    function addEmpleados(){
+    function addEmpleado(){
         $nombre="Martin";
         $apellido="Perez";
         $edad=38;
-        $tipo=1;
+        $tipo=2;
         $id_empresa=1;
-        $this->model->addEmpleado($nombre,$apellido,$edad,$tipo,$id_empresa);
+        $dni=3899999;
+        $tipo_diseniador="web";
+        $lenguaje=null;
+        //Carga de empleado
+        $this->model->addEmpleado($nombre,$apellido,$edad,$tipo,$id_empresa,$dni,$lenguaje,$tipo_diseniador);
+        //voy a comprobar si el usuario ingresado fue exitoso
+        $empleado=$this->model->getEmpleadoxDni($dni);
+        $this->view->addEmpleado($empleado);
+        }
+
+    function getPromedio($empresa){
+       $promedio= $this->model->getPromedio($empresa);
+        $this->view->getPromedio($promedio);
+
     }
+        
 
 }
 
