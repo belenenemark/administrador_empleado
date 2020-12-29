@@ -1,15 +1,18 @@
 <?php 
-
+require_once "./libs/smarty/Smarty.class.php";
 class EmpleadoView
 {
-    
+    private $Smarty;
 
     function __construct(){
-      
+        $this->Smarty = new Smarty();
+
     }
 
-    function getEmpleados($empleados){
-        var_dump($empleados);
+    function getEmpleados($empresa,$empleados){
+        $this->Smarty->assign('empresa_s', $empresa);
+        $this->Smarty->assign('empleados_s', $empleados);
+        $this->Smarty->display('templates/home.tpl');
 
     }
    function addEmpleado($empleado){

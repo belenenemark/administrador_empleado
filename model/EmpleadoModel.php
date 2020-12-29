@@ -8,12 +8,20 @@ class EmpleadoModel
         $this->db = new PDO('mysql:host=localhost;'.'dbname=adminempleados;charset=utf8', 'root', '');
     }
 /** Consulta para traer todos los empleados de una empresa */
-	 function getEmpleados($empresa){
-        $sentencia = $this->db->prepare( "SELECT * FROM empleado WHERE id_empresa=?");
-        $sentencia->execute(array($empresa));
+	 function getEmpleados(){
+        $sentencia = $this->db->prepare( "SELECT empleado.nombre, empleado.edad, empleado.apellido, empresa.nombre AS nombre_empresa FROM empleado INNER JOIN empresa on empleado.id_empresa=empresa.id ORDER BY id_empresa");
+        $sentencia->execute();
         $empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
         
         return $empleados;
+    }
+    //el objetivo de este metodo es obtener las empresas para cargar el formulario
+    function getEmpresas(){
+        $sentencia = $this->db->prepare( "SELECT * FROM empresa ");
+        $sentencia->execute();
+        $empresas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $empresas;
     }
     /**Consulta de un empleado por dni, tome esta consulta en vez de por id porque es mas intuitivo, la consulta por id seria lo mismo que por dni si reemplazas el campo del where*/
      function getEmpleadoxDni($dni){
@@ -43,11 +51,11 @@ class EmpleadoModel
      * y exigencias de mas datos se puede hacer extensible el agregar empleado solo haciendo la consulta especifica para 
      * lo adicional. 
        */
-    function addProgramador($id,$dni,$lenguaje){
+    private function addProgramador($id,$dni,$lenguaje){
         $sentencia = $this->db->prepare("INSERT INTO programador (id,dni,lenguaje_programacion) VALUES(?,?,?)");
         $sentencia->execute(array($id,$dni,$lenguaje));
     }
-   function addDiseñador($id,$dni,$tipo){
+   private function addDiseñador($id,$dni,$tipo){
         $sentencia = $this->db->prepare("INSERT INTO diseñador (id,dni,tipo_diseniador) VALUES(?,?,?)");
         $sentencia->execute(array($id,$dni,$tipo));
     }
